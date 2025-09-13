@@ -96,3 +96,13 @@ The application features:
 
 ### Browser Console:
 Open browser developer tools (F12) to see detailed error messages and debug information.
+
+
+<img width="3837" height="1768" alt="image" src="https://github.com/user-attachments/assets/bd417d3e-0d11-431a-a861-95b5712ac36c" />
+
+
+<img width="3839" height="1746" alt="image" src="https://github.com/user-attachments/assets/a7dca893-929c-4bea-87cf-20090baed145" />
+
+
+
+
