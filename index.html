@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NFT Metadata Viewer</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Aptos SDK Loading -->
+    <script type="module">
+        // Import Aptos SDK properly
+        import { Aptos, AptosConfig, Network } from 'https://unpkg.com/@aptos-labs/ts-sdk@latest/dist/index.js';
+        
+        // Make Aptos available globally
+        window.Aptos = Aptos;
+        window.AptosConfig = AptosConfig;
+        window.Network = Network;
+        
+        console.log('✅ Aptos SDK loaded successfully!');
+        
+        // Initialize app when DOM is ready
+        window.addEventListener('DOMContentLoaded', function() {
+            console.log('🚀 Starting NFT Metadata Viewer...');
+            
+            // Load app.js
+            const appScript = document.createElement('script');
+            appScript.src = 'app.js';
+            appScript.onload = function() {
+                console.log('✅ app.js loaded, starting application...');
+                new NFTMetadataViewer();
+            };
+            appScript.onerror = function() {
+                console.error('❌ Failed to load app.js');
+            };
+            document.head.appendChild(appScript);
+        });
+    </script>
+    
+    <!-- Fallback for browsers that don't support ES modules -->
+    <script nomodule>
+        console.log('⚠️ Browser does not support ES modules, using fallback...');
+        
+        // Fallback CDN loading
+        const script = document.createElement('script');
+        script.src = 'https://unpkg.com/@aptos-labs/ts-sdk@latest/dist/index.js';
+        script.onload = function() {
+            console.log('✅ Fallback SDK loaded');
+            // Initialize app
+            const appScript = document.createElement('script');
+            appScript.src = 'app.js';
+            appScript.onload = function() {
+                new NFTMetadataViewer();
+            };
+            document.head.appendChild(appScript);
+        };
+        script.onerror = function() {
+            console.error('❌ Failed to load SDK');
+        };
+        document.head.appendChild(script);
+    </script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎨 NFT Metadata Viewer</h1>
+            <p>View and manage NFT metadata on Aptos blockchain</p>
+        </header>
+
+        <div class="main-content">
+            <!-- Wallet Connection Section -->
+            <section class="wallet-section">
+                <h2>Wallet Connection</h2>
+                <div class="wallet-controls">
+                    <button id="connectWallet" class="btn btn-primary">Connect Wallet</button>
+                    <button id="disconnectWallet" class="btn btn-secondary" style="display: none;">Disconnect</button>
+                    <div id="walletInfo" class="wallet-info" style="display: none;">
+                        <p><strong>Address:</strong> <span id="walletAddress"></span></p>
+                        <p><strong>Network:</strong> <span id="networkInfo"></span></p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Create NFT Metadata Section -->
+            <section class="create-section">
+                <h2>Create NFT Metadata</h2>
+                <form id="createForm" class="form">
+                    <div class="form-group">
+                        <label for="nftName">NFT Name:</label>
+                        <input type="text" id="nftName" placeholder="Enter NFT name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="nftUri">Metadata URI:</label>
+                        <input type="url" id="nftUri" placeholder="https://example.com/metadata.json" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Create NFT Metadata</button>
+                </form>
+            </section>
+
+            <!-- View NFT Metadata Section -->
+            <section class="view-section">
+                <h2>View NFT Metadata</h2>
+                <div class="search-form">
+                    <div class="form-group">
+                        <label for="accountAddress">Account Address:</label>
+                        <input type="text" id="accountAddress" placeholder="Enter account address">
+                        <button id="useMyAddress" class="btn btn-small">Use My Address</button>
+                    </div>
+                    <button id="fetchMetadata" class="btn btn-primary">Fetch Metadata</button>
+                </div>
+                
+                <div id="metadataResult" class="metadata-result" style="display: none;">
+                    <h3>NFT Metadata</h3>
+                    <div class="metadata-card">
+                        <div class="metadata-field">
+                            <label>Name:</label>
+                            <span id="metadataName"></span>
+                        </div>
+                        <div class="metadata-field">
+                            <label>URI:</label>
+                            <span id="metadataUri"></span>
+                        </div>
+                        <div class="metadata-field">
+                            <label>Account:</label>
+                            <span id="metadataAccount"></span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Loading and Error Messages -->
+            <div id="loadingIndicator" class="loading" style="display: none;">
+                <div class="spinner"></div>
+                <p>Processing transaction...</p>
+            </div>
+
+            <div id="errorMessage" class="error-message" style="display: none;">
+                <h3>Error</h3>
+                <p id="errorText"></p>
+            </div>
+
+            <div id="successMessage" class="success-message" style="display: none;">
+                <h3>Success!</h3>
+                <p id="successText"></p>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

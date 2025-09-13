@@ -1,0 +1,27 @@
+{
+  "name": "nft-metadata-viewer",
+  "version": "1.0.0",
+  "description": "NFT Metadata Viewer for Aptos Blockchain",
+  "main": "app.js",
+  "scripts": {
+    "start": "npx http-server . -p 8080",
+    "dev": "npx live-server .",
+    "build": "echo 'Build complete'",
+    "test": "node tests/integration-tests.js"
+  },
+  "dependencies": {
+    "@aptos-labs/ts-sdk": "^1.0.0"
+  },
+  "devDependencies": {
+    "http-server": "^14.1.1",
+    "live-server": "^1.2.2"
+  },
+  "keywords": [
+    "aptos",
+    "nft",
+    "blockchain",
+    "web3"
+  ],
+  "author": "Your Name",
+  "license": "MIT"
+}

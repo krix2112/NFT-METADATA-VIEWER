@@ -1,0 +1,15 @@
+[package]
+name = "project-day2"
+version = "1.0.0"
+authors = []
+
+[addresses]
+my_module = "0x63b355d6f1a9be2d96799b04e1081e67f5a9b3ed8b9e9c5691f07392bba51f60"
+
+
+[dependencies.AptosFramework]
+git = "https://github.com/aptos-labs/aptos-framework.git"
+rev = "devnet"
+subdir = "aptos-framework"
+
+[dev-dependencies]
